@@ -131,9 +131,27 @@ angular.module('index').controller('indexController', ['$scope', '$injector',
      */
     var checkClipboard = function checkClipboard() {
         clipboardService.getLocalClipboard().then(function clipboardRead(data) {
+            console.log(data);
             $scope.$broadcast('guacClipboard', data);
         });
     };
+/*
+angular.module('MyApp', ['angular-clipboard'])
+    .controller('MyController', ['$scope', function ($scope) {
+        $scope.supported = false;
+ 
+        $scope.textToCopy = 'I can copy by clicking!';
+ 
+        $scope.success = function () {
+            console.log('Copied!');
+        };
+ 
+        $scope.fail = function (err) {
+            console.error('Error!', err);
+        };
+    }]);
+    https://www.npmjs.com/package/angular-clipboard
+*/
 
     // Attempt to read the clipboard if it may have changed
     $window.addEventListener('load',  checkClipboard, true);

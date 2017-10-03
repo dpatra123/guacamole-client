@@ -20,8 +20,8 @@
 /**
  * The controller for the page used to connect to a connection or balancing group.
  */
-angular.module('client').controller('clientController', ['$scope', '$routeParams', '$injector',
-        function clientController($scope, $routeParams, $injector) {
+angular.module('client',['angular-clipboard']).controller('clientController', 'clipboard',['$scope', '$routeParams', '$injector',
+        function clientController($scope, $routeParams, $injector,clipboard) {
 
     // Required types
     var ManagedClient      = $injector.get('ManagedClient');
@@ -431,6 +431,16 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
             clipboardDataFromKey[keysym] = data;
 
     });
+
+        console.log(clipboard);
+
+        if (!clipboard.supported) {
+            console.log(clipboard);
+        }
+ 
+        /*$scope.copy = function () {
+            //clipboard.copyText('Copy this text');
+        };*/
 
     // Pull sharing profiles once the tunnel UUID is known
     $scope.$watch('client.tunnel.uuid', function retrieveSharingProfiles(uuid) {
