@@ -426,6 +426,8 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
     $scope.$watch('client.clipboardData', function clipboardChanged(data) {
 
         // Sync local clipboard as long as the menu is not open
+        alert(data);
+        console.log(data);
         if (!$scope.menu.shown)
             clipboardService.setLocalClipboard(data);
 
