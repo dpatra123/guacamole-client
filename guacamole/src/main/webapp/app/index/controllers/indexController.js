@@ -140,7 +140,7 @@ angular.module('index').controller('indexController', ['$scope', '$injector',
     $window.addEventListener('copy',  checkClipboard, true);
     $window.addEventListener('cut',   checkClipboard, true);
     $window.addEventListener('focus', function focusGained(e) {
-
+        alert('asd');
         // Only recheck clipboard if it's the window itself that gained focus
         if (e.target === $window)
             checkClipboard();
