@@ -425,10 +425,18 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
     $scope.$watch('client.clipboardData', function clipboardChanged(data) {
 
         // Sync local clipboard as long as the menu is not open
-        alert(data);
+        
         console.log(data);
-        if (!$scope.menu.shown)
+        if (!$scope.menu.shown){
             clipboardService.setLocalClipboard(data);
+        }else{
+            var clipboardData, pastedData;
+            clipboardData = e.clipboardData || window.clipboardData;
+            console.log(clipboardData);
+            pastedData = clipboardData.getData('Text');
+            clipboardService.setLocalClipboard(pastedData);
+            //document.getElementsByClassName("clipboard")[0].value = pastedData;
+        }
 
         // Associate new clipboard data with any currently-pressed key
         for (var keysym in keysCurrentlyPressed)
