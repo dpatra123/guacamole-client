@@ -79,8 +79,8 @@ angular.module('clipboard').factory('clipboardService', ['$injector',
     };
 
     // Prevent events generated due to execCommand() from disturbing external things
-    clipboardContent.addEventListener('copy');
-    clipboardContent.addEventListener('paste');
+    //clipboardContent.addEventListener('copy',  stopEventPropagation);
+    //clipboardContent.addEventListener('paste', stopEventPropagation);
 
     /**
      * A stack of past node selection ranges. A range convering the nodes
