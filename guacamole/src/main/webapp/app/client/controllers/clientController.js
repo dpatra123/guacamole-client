@@ -431,13 +431,17 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
             clipboardService.setLocalClipboard(data);
         }else{
             var clipboardData, pastedData;
-            clipboardData = e.clipboardData || window.clipboardData;
+            clipboardData = window.clipboardData;
             console.log(clipboardData);
-            pastedData = clipboardData.getData('Text');
-            clipboardService.setLocalClipboard(pastedData);
+            
+            
+                    pastedData = clipboardData.getData('Text');
+                    clipboardService.setLocalClipboard(pastedData);
+        
+            
             //document.getElementsByClassName("clipboard")[0].value = pastedData;
         }
-
+console.log(clipboardData);
         // Associate new clipboard data with any currently-pressed key
         for (var keysym in keysCurrentlyPressed)
             clipboardDataFromKey[keysym] = data;
