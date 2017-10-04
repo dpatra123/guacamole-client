@@ -277,7 +277,10 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
 
     /*
      * Check to see if all currently pressed keys are in the set of menu keys.
-     */  
+     */ 
+
+     alert('home');
+
     function checkMenuModeActive() {
         for(var keysym in keysCurrentlyPressed) {
             if(!MENU_KEYS[keysym]) {
