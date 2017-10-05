@@ -29,6 +29,7 @@ angular.module('clipboard').directive('guacClipboard', ['$injector',
     // Required types
     var ClipboardData = $injector.get('ClipboardData');
     console.log(ClipboardData);
+    console.log("guacClipboard");
 
     /**
      * Configuration object for the guacClipboard directive.

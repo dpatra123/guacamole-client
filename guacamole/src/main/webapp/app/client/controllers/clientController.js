@@ -427,21 +427,20 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
         // Sync local clipboard as long as the menu is not open
         
         console.log(data);
+        console.log("controller");
         if (!$scope.menu.shown){
             clipboardService.setLocalClipboard(data);
-        }else{
+        }
+       //   angular.element('.clipboard').triggerHandler('keypress');
+        /*else{
             var clipboardData, pastedData;
             clipboardData = window.clipboardData;
             console.log(clipboardData);
-            
-            
-                    pastedData = clipboardData.getData('Text');
-                    clipboardService.setLocalClipboard(pastedData);
-        
-            
+            pastedData = clipboardData.getData('Text');
+            clipboardService.setLocalClipboard(pastedData);
             //document.getElementsByClassName("clipboard")[0].value = pastedData;
-        }
-console.log(clipboardData);
+        }*/
+        //console.log(clipboardData);
         // Associate new clipboard data with any currently-pressed key
         for (var keysym in keysCurrentlyPressed)
             clipboardDataFromKey[keysym] = data;
