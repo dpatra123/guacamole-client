@@ -359,7 +359,11 @@
             <version>1.3.16</version>
             <scope>runtime</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>angular-clipboard</artifactId>
+            <version>1.6.0</version>
+        </dependency>
         <!-- Shim allowing arbitrary retrieval/creation order for AngularJS modules -->
         <dependency>
             <groupId>org.webjars.bower</groupId>
