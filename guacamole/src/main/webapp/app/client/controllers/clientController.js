@@ -20,7 +20,7 @@
 /**
  * The controller for the page used to connect to a connection or balancing group.
  */
-angular.module('client').controller('clientController', ['$scope', '$routeParams', '$injector',
+angular.module('client',['angular-clipboard']).controller('clientController', ['$scope', '$routeParams', '$injector','clipboard',
         function clientController($scope, $routeParams, $injector) {
 
     // Required types
@@ -430,6 +430,7 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
         
         console.log(data);
         console.log("controller");
+        $scope.client.clipboardData;
         if (!$scope.menu.shown){
             clipboardService.setLocalClipboard(data);
         }
@@ -547,7 +548,7 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
     // Update pressed keys as they are released, synchronizing the clipboard
     // with any data that appears to have come from those key presses
     $scope.$on('guacKeyup', function keyupListener(event, keysym, keyboard) {
-
+        console.log('Debasis');
         // Sync local clipboard with any clipboard data received while this
         // key was pressed (if any) as long as the menu is not open
         var clipboardData = clipboardDataFromKey[keysym];
