@@ -539,31 +539,34 @@ angular.module('client',['angular-clipboard']).controller('clientController', ['
                 });
             }
         }else{
-            event.preventDefault();
-            var clipboardData, pastedData;
-
-            if (window.clipboardData) { //IE
-                text = window.clipboardData.getData('Text');
-                } else if (event.originalEvent.clipboardData) {
-                    try {
-                        text = event.originalEvent.clipboardData.getData('text/plain');
-                    } catch (ex) {
-                        text = undefined;
+            if(!_.isEmpty(_.pick(SHIFT_KEYS, currentKeysPressedKeys)) &&
+               !_.isEmpty(_.pick(CTRL_KEYS, currentKeysPressedKeys))){
+                event.preventDefault();
+            if(keysym === '86'){
+                var clipboardData, pastedData;
+                if (window.clipboardData) { //IE
+                    text = window.clipboardData.getData('Text');
+                    } else if (event.originalEvent.clipboardData) {
+                        try {
+                            text = event.originalEvent.clipboardData.getData('text/plain');
+                        } catch (ex) {
+                            text = undefined;
+                        }
                     }
+                //clipboardData = window.clipboardData;
+                    console.log(text);
+                    //pastedData = clipboardData.getData('Text');
+                    clipboardService.setLocalClipboard(text);
+                    document.getElementsByClassName("clipboard")[0].value = text;
+                    console.log('Debasis');
+                    console.log("event : "+event);
+                    console.log("keysym : "+keysym);
+                    console.log("keyboard : "+keyboard);
+                    /*
+                            console.log('OPen Clipboard');
+                            $scope.client.clipboardData;*/
                 }
-            //clipboardData = window.clipboardData;
-            console.log(text);
-            //pastedData = clipboardData.getData('Text');
-            clipboardService.setLocalClipboard(text);
-            document.getElementsByClassName("clipboard")[0].value = text;
-            console.log('Debasis');
-            console.log("event : "+event);
-            console.log("keysym : "+keysym);
-            console.log("keyboard : "+keyboard);
-            /*if(keysym === '86'){
-                    console.log('OPen Clipboard');
-                    $scope.client.clipboardData;
-            }*/
+            }
         }
 
     });
