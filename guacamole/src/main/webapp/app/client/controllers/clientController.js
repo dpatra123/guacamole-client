@@ -430,7 +430,7 @@ angular.module('client',['angular-clipboard']).controller('clientController', ['
         
         console.log(data);
         console.log("controller");
-        $scope.client.clipboardData;
+        
         if (!$scope.menu.shown){
             clipboardService.setLocalClipboard(data);
         }
@@ -509,10 +509,7 @@ angular.module('client',['angular-clipboard']).controller('clientController', ['
 
     // Track pressed keys, opening the Guacamole menu after Ctrl+Alt+Shift
     $scope.$on('guacKeydown', function keydownListener(event, keysym, keyboard) {
-        console.log("event : "+event);
-        console.log("keysym : "+keysym);
-        console.log("keyboard : "+keyboard);
-        console.log('OPen Clipboard');
+
         // Record key as pressed
         keysCurrentlyPressed[keysym] = true;   
         
@@ -541,6 +538,32 @@ angular.module('client',['angular-clipboard']).controller('clientController', ['
                     $scope.menu.shown = !$scope.menu.shown;
                 });
             }
+        }else{
+            event.preventDefault();
+            var clipboardData, pastedData;
+
+            if (window.clipboardData) { //IE
+                text = window.clipboardData.getData('Text');
+                } else if (event.originalEvent.clipboardData) {
+                    try {
+                        text = event.originalEvent.clipboardData.getData('text/plain');
+                    } catch (ex) {
+                        text = undefined;
+                    }
+                }
+            //clipboardData = window.clipboardData;
+            console.log(text);
+            //pastedData = clipboardData.getData('Text');
+            clipboardService.setLocalClipboard(text);
+            document.getElementsByClassName("clipboard")[0].value = text;
+            console.log('Debasis');
+            console.log("event : "+event);
+            console.log("keysym : "+keysym);
+            console.log("keyboard : "+keyboard);
+            /*if(keysym === '86'){
+                    console.log('OPen Clipboard');
+                    $scope.client.clipboardData;
+            }*/
         }
 
     });
@@ -548,7 +571,7 @@ angular.module('client',['angular-clipboard']).controller('clientController', ['
     // Update pressed keys as they are released, synchronizing the clipboard
     // with any data that appears to have come from those key presses
     $scope.$on('guacKeyup', function keyupListener(event, keysym, keyboard) {
-        console.log('Debasis');
+
         // Sync local clipboard with any clipboard data received while this
         // key was pressed (if any) as long as the menu is not open
         var clipboardData = clipboardDataFromKey[keysym];
