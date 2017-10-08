@@ -538,11 +538,22 @@ angular.module('client',['angular-clipboard']).controller('clientController', ['
                     $scope.menu.shown = !$scope.menu.shown;
                 });
             }
-        }else{
-            if(!_.isEmpty(_.pick(SHIFT_KEYS, currentKeysPressedKeys)) &&
-               !_.isEmpty(_.pick(CTRL_KEYS, currentKeysPressedKeys))){
-                event.preventDefault();
-            if(keysym === '86'){
+         }
+        }
+
+    });
+
+    // Update pressed keys as they are released, synchronizing the clipboard
+    // with any data that appears to have come from those key presses
+    $scope.$on('guacKeyup', function keyupListener(event, keysym, keyboard) {
+
+        // Sync local clipboard with any clipboard data received while this
+        // key was pressed (if any) as long as the menu is not open
+        
+            var ctrlKey = 17, vKey = 86, sKey = 16;
+            if (event.keyCode === ctrlKey && event.keyCode === sKey && event.keyCode === vKey ){
+                
+            
                 var clipboardData, pastedData;
                 if (window.clipboardData) { //IE
                     text = window.clipboardData.getData('Text');
@@ -566,17 +577,8 @@ angular.module('client',['angular-clipboard']).controller('clientController', ['
                             console.log('OPen Clipboard');
                             $scope.client.clipboardData;*/
                 }
-            }
-        }
+            
 
-    });
-
-    // Update pressed keys as they are released, synchronizing the clipboard
-    // with any data that appears to have come from those key presses
-    $scope.$on('guacKeyup', function keyupListener(event, keysym, keyboard) {
-
-        // Sync local clipboard with any clipboard data received while this
-        // key was pressed (if any) as long as the menu is not open
         var clipboardData = clipboardDataFromKey[keysym];
         if (clipboardData && !$scope.menu.shown)
             clipboardService.setLocalClipboard(clipboardData);
