@@ -550,7 +550,7 @@ angular.module('client',['angular-clipboard']).controller('clientController', ['
         // Sync local clipboard with any clipboard data received while this
         // key was pressed (if any) as long as the menu is not open
         
-            var ctrlKey = 17, vKey = 86, sKey = 16;
+            var ctrlKey = 17; var vKey = 86; var sKey = 16;
             if (event.keyCode === ctrlKey && event.keyCode === sKey && event.keyCode === vKey ){
                 
             
