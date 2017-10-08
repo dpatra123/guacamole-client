@@ -409,6 +409,8 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
         
         // Send clipboard data if menu is hidden
        // if (!menuShown && menuShownPreviousState)
+        console.log(menuShown);
+        console.log("Show Menu");
             $scope.$broadcast('guacClipboard', $scope.client.clipboardData);
         
         // Disable client keyboard if the menu is shown
@@ -506,7 +508,10 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
 
     // Track pressed keys, opening the Guacamole menu after Ctrl+Alt+Shift
     $scope.$on('guacKeydown', function keydownListener(event, keysym, keyboard) {
-
+        console.log("event : "+event);
+        console.log("keysym : "+keysym);
+        console.log("keyboard : "+keyboard);
+        console.log('OPen Clipboard');
         // Record key as pressed
         keysCurrentlyPressed[keysym] = true;   
         
