@@ -539,7 +539,6 @@ angular.module('client',['angular-clipboard']).controller('clientController', ['
                 });
             }
          }
-        }
 
     });
 
