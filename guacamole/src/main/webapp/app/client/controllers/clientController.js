@@ -507,7 +507,7 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
                !_.isEmpty(_.pick(ALT_KEYS, currentKeysPressedKeys)) &&
                !_.isEmpty(_.pick(CTRL_KEYS, currentKeysPressedKeys))
             ) {*/
-                console.log("show menu");
+                //console.log("show menu");
                 // Don't send this key event through to the client
                 event.preventDefault();
                 
