@@ -406,7 +406,7 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
     $scope.$watch('menu.shown', function menuVisibilityChanged(menuShown, menuShownPreviousState) {
         
         // Send clipboard data if menu is hidden
-        if (!menuShown && menuShownPreviousState)
+        //if (!menuShown && menuShownPreviousState)
             $scope.$broadcast('guacClipboard', $scope.client.clipboardData);
         
         // Disable client keyboard if the menu is shown
@@ -423,7 +423,7 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
     $scope.$watch('client.clipboardData', function clipboardChanged(data) {
 
         // Sync local clipboard as long as the menu is not open
-        if (!$scope.menu.shown)
+        //if (!$scope.menu.shown)
             clipboardService.setLocalClipboard(data);
 
         // Associate new clipboard data with any currently-pressed key
@@ -509,17 +509,19 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
             ) {
                 console.log("show menu");
                 // Don't send this key event through to the client
-                event.preventDefault();
+                //event.preventDefault();
                 
                 // Reset the keys pressed
-                keysCurrentlyPressed = {};
-                keyboard.reset();
+                //keysCurrentlyPressed = {};
+                //keyboard.reset();
                 
                 // Toggle the menu
                 $scope.$apply(function() {
                     $scope.menu.shown = !$scope.menu.shown;
                 });
             }
+        }else{
+            $scope.menu.shown = true;
         }
 
     });
