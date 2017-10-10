@@ -499,31 +499,24 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
          * If only menu keys are pressed, and we have one keysym from each group,
          * and one of the keys is being released, show the menu. 
          */
-        /*if(checkMenuModeActive()) {
+        if(checkMenuModeActive()) {
             var currentKeysPressedKeys = Object.keys(keysCurrentlyPressed);
             
             // Check that there is a key pressed for each of the required key classes
-            if(!_.isEmpty(_.pick(SHIFT_KEYS, currentKeysPressedKeys)) &&
-               !_.isEmpty(_.pick(ALT_KEYS, currentKeysPressedKeys)) &&
-               !_.isEmpty(_.pick(CTRL_KEYS, currentKeysPressedKeys))
-            ) {
                 //console.log("show menu");
                 // Don't send this key event through to the client
                 //event.preventDefault();
                 
                 // Reset the keys pressed
-                //keysCurrentlyPressed = {};
+                keysCurrentlyPressed = {};
                 keyboard.reset();
                 
                 // Toggle the menu
                 $scope.$apply(function() {
                     $scope.menu.shown = !$scope.menu.shown;
                 });
-            //}
-        //}else{
-            $scope.menu.shown = true;
-        //}
-        }*/
+            
+        }
 
     });
 
