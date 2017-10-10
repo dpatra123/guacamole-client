@@ -406,8 +406,8 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
     $scope.$watch('menu.shown', function menuVisibilityChanged(menuShown, menuShownPreviousState) {
         
         // Send clipboard data if menu is hidden
-        //if (!menuShown && menuShownPreviousState)
-        $scope.$broadcast('guacClipboard', $scope.client.clipboardData);
+        if (!menuShown && menuShownPreviousState)
+            $scope.$broadcast('guacClipboard', $scope.client.clipboardData);
         
         // Disable client keyboard if the menu is shown
         $scope.client.clientProperties.keyboardEnabled = true;
@@ -423,7 +423,7 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
     $scope.$watch('client.clipboardData', function clipboardChanged(data) {
 
         // Sync local clipboard as long as the menu is not open
-        //if (!$scope.menu.shown)
+        if ($scope.menu.shown)
             clipboardService.setLocalClipboard(data);
 
         // Associate new clipboard data with any currently-pressed key
@@ -499,31 +499,31 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
          * If only menu keys are pressed, and we have one keysym from each group,
          * and one of the keys is being released, show the menu. 
          */
-        if(checkMenuModeActive()) {
+        /*if(checkMenuModeActive()) {
             var currentKeysPressedKeys = Object.keys(keysCurrentlyPressed);
             
             // Check that there is a key pressed for each of the required key classes
-            /*if(!_.isEmpty(_.pick(SHIFT_KEYS, currentKeysPressedKeys)) &&
+            if(!_.isEmpty(_.pick(SHIFT_KEYS, currentKeysPressedKeys)) &&
                !_.isEmpty(_.pick(ALT_KEYS, currentKeysPressedKeys)) &&
                !_.isEmpty(_.pick(CTRL_KEYS, currentKeysPressedKeys))
-            ) {*/
+            ) {
                 //console.log("show menu");
                 // Don't send this key event through to the client
-                event.preventDefault();
+                //event.preventDefault();
                 
                 // Reset the keys pressed
-                keysCurrentlyPressed = {};
+                //keysCurrentlyPressed = {};
                 keyboard.reset();
                 
                 // Toggle the menu
-                /*$scope.$apply(function() {
+                $scope.$apply(function() {
                     $scope.menu.shown = !$scope.menu.shown;
-                });*/
+                });
             //}
         //}else{
             $scope.menu.shown = true;
         //}
-        }
+        }*/
 
     });
 
