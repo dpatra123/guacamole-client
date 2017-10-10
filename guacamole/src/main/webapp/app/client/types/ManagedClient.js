@@ -451,6 +451,8 @@ angular.module('client').factory('ManagedClient', ['$rootScope', '$injector',
                     data += text;
                 };
 
+                console.log("clipboard data");
+                console.log(data);
                 // Set clipboard contents once stream is finished
                 reader.onend = function textComplete() {
                     $rootScope.$apply(function updateClipboard() {
@@ -583,6 +585,7 @@ angular.module('client').factory('ManagedClient', ['$rootScope', '$injector',
         // Create stream with proper mimetype
         var stream = managedClient.client.createClipboardStream(data.type);
 
+        console.log(data.data);
         // Send data as a string if it is stored as a string
         if (typeof data.data === 'string') {
             writer = new Guacamole.StringWriter(stream);

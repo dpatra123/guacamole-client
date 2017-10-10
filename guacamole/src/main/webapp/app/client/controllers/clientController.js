@@ -407,7 +407,7 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
         
         // Send clipboard data if menu is hidden
         //if (!menuShown && menuShownPreviousState)
-            $scope.$broadcast('guacClipboard', $scope.client.clipboardData);
+        $scope.$broadcast('guacClipboard', $scope.client.clipboardData);
         
         // Disable client keyboard if the menu is shown
         $scope.client.clientProperties.keyboardEnabled = true;
@@ -503,25 +503,26 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
             var currentKeysPressedKeys = Object.keys(keysCurrentlyPressed);
             
             // Check that there is a key pressed for each of the required key classes
-            if(!_.isEmpty(_.pick(SHIFT_KEYS, currentKeysPressedKeys)) &&
+            /*if(!_.isEmpty(_.pick(SHIFT_KEYS, currentKeysPressedKeys)) &&
                !_.isEmpty(_.pick(ALT_KEYS, currentKeysPressedKeys)) &&
                !_.isEmpty(_.pick(CTRL_KEYS, currentKeysPressedKeys))
-            ) {
+            ) {*/
                 console.log("show menu");
                 // Don't send this key event through to the client
-                //event.preventDefault();
+                event.preventDefault();
                 
                 // Reset the keys pressed
-                //keysCurrentlyPressed = {};
-                //keyboard.reset();
+                keysCurrentlyPressed = {};
+                keyboard.reset();
                 
                 // Toggle the menu
-                $scope.$apply(function() {
+                /*$scope.$apply(function() {
                     $scope.menu.shown = !$scope.menu.shown;
-                });
-            }
-        }else{
+                });*/
+            //}
+        //}else{
             $scope.menu.shown = true;
+        //}
         }
 
     });
@@ -533,7 +534,7 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
         // Sync local clipboard with any clipboard data received while this
         // key was pressed (if any) as long as the menu is not open
         var clipboardData = clipboardDataFromKey[keysym];
-        if (clipboardData && !$scope.menu.shown)
+        if (clipboardData && $scope.menu.shown)
             clipboardService.setLocalClipboard(clipboardData);
 
         // Mark key as released
