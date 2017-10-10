@@ -208,7 +208,7 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
          *
          * @type Boolean
          */
-        shown : false,
+        shown : true,
 
         /**
          * Whether the Guacamole display should be scaled to fit the browser
@@ -279,11 +279,11 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
      * Check to see if all currently pressed keys are in the set of menu keys.
      */  
     function checkMenuModeActive() {
-        for(var keysym in keysCurrentlyPressed) {
+        /*for(var keysym in keysCurrentlyPressed) {
             if(!MENU_KEYS[keysym]) {
                 return false;
             }
-        }
+        }*/
         
         return true;
     }
@@ -410,7 +410,7 @@ angular.module('client').controller('clientController', ['$scope', '$routeParams
             $scope.$broadcast('guacClipboard', $scope.client.clipboardData);
         
         // Disable client keyboard if the menu is shown
-        $scope.client.clientProperties.keyboardEnabled = !menuShown;
+        $scope.client.clientProperties.keyboardEnabled = true;
 
     });
 
